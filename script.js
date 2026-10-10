@@ -12,6 +12,31 @@ window.addEventListener('scroll', () => {
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 
+// Theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
+
+// Check for saved theme preference
+const savedTheme = localStorage.getItem('portfolio-theme');
+if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    if (document.body.classList.contains('light-mode')) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+        localStorage.setItem('portfolio-theme', 'light');
+    } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+        localStorage.setItem('portfolio-theme', 'dark');
+    }
+});
+
 hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     const icon = hamburger.querySelector('i');
